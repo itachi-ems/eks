@@ -1,0 +1,26 @@
+apiVersion: apps/v
+kind: Deployment
+metadata:
+  name: orders
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: orders
+  template: 
+    metadata:
+      labels:
+        app: orders
+    spec: 
+        containers:
+          - name: orders
+            image: mguay/ordering-app-orders
+            port: 
+              - containers: 3000
+            env:
+              - name: PORT
+                value: 3000
+              - name: RABBIT_MQ_BILLING_QUEUE
+                value: billing
+              - name: RABBIT_MQ_AUTH_QUEUE
+                value: auth
